@@ -63,7 +63,7 @@ Now since I am at a function call, I would press `s` to Step Into the function
 `6               a=b;`  
 `(gdb) n`  
 `7               b=temp;`  
-`(gdb)`
+`(gdb)`  
 `8               return true;`  
   
 At any time I can print the value of a variable using `print <variable>`  
