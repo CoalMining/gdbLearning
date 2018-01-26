@@ -40,7 +40,7 @@ The above statement will set break point at line number 12. This produces output
 
 `(gdb) run
 Starting program: /home/pp0030/gdb/swap  
-Breakpoint 1, main () at swap.cpp:12  
+Breakpoint 1, main () at swap.cpp:12  </br>
 12              int a=5,b=7;`      
 This command will actually start to run our program and the program execution stops at line 12 where we have our breakpoint.  
   
@@ -50,12 +50,15 @@ Following is what I would see when I use `n`
 13              std::cout<<"Before swapping: a= "<<a<<",b= "<<b<<std::endl;`  
   
 Simply presssing *enter* means that the previous command will be used  
-`(gdb)
+`r 
+(gdb)
 Before swapping: a= 5,b= 7
-14              if(swap(a,b))`  
+14              if(swap(a,b))
+`  
   
 Now since I am at a function call, I would press `s` to Step Into the function  
-`(gdb) s
+`r
+(gdb) s
 swap (a=@0x7fffffffe3c0: 5, b=@0x7fffffffe3c4: 7) at swap.cpp:5
 5               int temp = a;
 (gdb) n
@@ -63,16 +66,20 @@ swap (a=@0x7fffffffe3c0: 5, b=@0x7fffffffe3c4: 7) at swap.cpp:5
 (gdb) n
 7               b=temp;
 (gdb)
-8               return true;`  
+8               return true;
+`  
   
 At any time I can print the value of a variable using `print <variable>`  
-`(gdb) print a
-$1 = (int &) @0x7fffffffe3c0: 7`  
+`r (gdb) print a
+$1 = (int &) @0x7fffffffe3c0: 7
+`  
   
 quit will Quit the gdb.    
-`(gdb) quit  
+`r 
+(gdb) quit  
 A debugging session is active.  
   
         Inferior 1 [process 12172] will be killed.  
   
-Quit anyway? (y or n) y`  
+Quit anyway? (y or n) y
+`  
