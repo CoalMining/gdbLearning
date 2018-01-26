@@ -51,7 +51,7 @@ Following is what I would see when I use `n`
   
 Simply presssing *enter* means that the previous command will be used  
 
-`(gdb)  `
+`(gdb)`  
 `Before swapping: a= 5,b= 7`  
 `14              if(swap(a,b))`    
   
