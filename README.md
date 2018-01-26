@@ -2,25 +2,32 @@
 
 Learning to use gdb in linux machine....  
 
-First I wrote a code that declares an integer array of 4 elements. I print out the elements but I do not free/delete the array.    
-  
-Compiling and running works fine. Following is the code  
-  
+Lets make the program that is simple, but still calls a function. Following program calls a function that swaps the numbers passed as arguments.  
+Following is the full program.  
 ```c  
 #include <iostream>  
-#include <cstdlib>  
   
-using namespace std;  
-  
+bool swap(int &a,int &b)  
+{  
+	int temp = a;  
+	a=b;  
+	b=temp;  
+	return true;  
+}  
 int main()  
 {  
-int *arr = (int*)malloc(4*sizeof(int));  
-  
-for(int i=0;i<4;i++)  
-cout<<arr[i]<<" "<<endl;  
-  
+	int a=5,b=7;  
+	std::cout<<"Before swapping: a= "<<a<<",b= "<<b<<std::endl;  
+	if(swap(a,b))  
+	{  
+		std::cout<<"After swapping: a= "<<a<<",b= "<<b<<std::endl;  
+	}else{  
+		std::cout<<"Error in swapping"<<std::endl;  
+	}  
+return 0;  
 }  
-```  
-Following is how it look when I compile and run.    
-![alt text](images/1compilingandrunning.JPG)
-
+```
+Compiling and running the code is fine. But inorder to debug, * -g * flag should be provided while compiling. The command that I use to compile is as follows  
+`g++ swap.c -o swap -g`  
+To start debugging `gdb swap`  
+To set the breakpoint before running the program, we should use `b <lineNumber>`. The first command lies at line number 12, so I used `b 12`
