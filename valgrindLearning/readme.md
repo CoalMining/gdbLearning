@@ -82,9 +82,9 @@ I simply commented out the `free(myIntMalloc)` statement from the above code, an
 ==4833== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 
 ```
-So not freeing is a clear memory leak, and as expected, we see 40 bytes in 1 block as **definitely lost**
+So not freeing is a clear memory leak, and as expected, we see 40 bytes in 1 block as **definitely lost**  
 Failure to delete the memory allocated with **new** also gives similar result.
   
 ## Step3
 
-In step 3, I will try to recreate **possibly lost** leakage
+In step 3, I will try to recreate **possibly lost** leakage.
