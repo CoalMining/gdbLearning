@@ -9,7 +9,7 @@ int main()
 	int *myIntNew = new int[10];
 
 
-	delete[] myIntNew;
+	//delete[] myIntNew;
 	free(myIntMalloc);
 
 	return 0;

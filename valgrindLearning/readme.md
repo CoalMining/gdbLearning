@@ -53,4 +53,38 @@ Fllowing was the output gained when I used command `valgrind --leak-check=yes ./
 ==4271== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 
 ```
+  
+While the information that is present here is too much, and since the program has no any error in terms of memory, we do not need to worry. But is is worthwhile to note that **definitely lost** means the memory that we need to fix as memory is being leaked . Other kind of leak is **possibly lost** which means the memory is not leaked unless you do something with pointers. (i will try to create one example for this later in this document)  
+  
+## Step2
+  
+So inorder to see the leaks I modified the program to have no free statements for memory allocated by *malloc*.  
+I simply commented out the `free(myIntMalloc)` statement from the above code, and got the following result from valgrind  
+```
+==4833== HEAP SUMMARY:
+==4833==     in use at exit: 72,744 bytes in 2 blocks
+==4833==   total heap usage: 3 allocs, 1 frees, 72,784 bytes allocated
+==4833== 
+==4833== 40 bytes in 1 blocks are definitely lost in loss record 1 of 2
+==4833==    at 0x4C2DB8F: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==4833==    by 0x4007AA: main (in /home/prawar/prawar/gdbLearning/valgrindLearning/myProg1)
+==4833== 
+==4833== LEAK SUMMARY:
+==4833==    definitely lost: 40 bytes in 1 blocks
+==4833==    indirectly lost: 0 bytes in 0 blocks
+==4833==      possibly lost: 0 bytes in 0 blocks
+==4833==    still reachable: 72,704 bytes in 1 blocks
+==4833==         suppressed: 0 bytes in 0 blocks
+==4833== Reachable blocks (those to which a pointer was found) are not shown.
+==4833== To see them, rerun with: --leak-check=full --show-leak-kinds=all
+==4833== 
+==4833== For counts of detected and suppressed errors, rerun with: -v
+==4833== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
 
+```
+So not freeing is a clear memory leak, and as expected, we see 40 bytes in 1 block as **definitely lost**
+Failure to delete the memory allocated with **new** also gives similar result.
+  
+## Step3
+
+In step 3, I will try to recreate **possibly lost** leakage
