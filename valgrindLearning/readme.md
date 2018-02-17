@@ -254,4 +254,4 @@ int main()
 	return 0;
 }
 ```  
-What this basically does is creates a smart pointer pointing to object inside the function. Destructor to it is called whenever we leave the function. So there is not point in pointing to that object by a normal pointer. So the best idea would be to make a copy.
+What this basically does is creates a smart pointer pointing to object inside the function. Destructor to it is called whenever we leave the function. So there is not point in pointing to that object by a normal pointer. So the best idea would be to make a copy. Similar is the case for shared_ptr also.
