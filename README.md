@@ -28,7 +28,7 @@ return 0;
 }  
 ```
 Compiling and running the code is fine. But inorder to debug, * -g * flag should be provided while compiling. The command that I use to compile is as follows  
-`g++ swap.c -o swap -g`  
+`g++ swap.cpp -o swap -g`  
 To start debugging `gdb swap`  
 To set the breakpoint before running the program, we should use `b <lineNumber>`. The first command lies at line number 12, so I used `b 12`  
 Following is how it looks:  
@@ -77,3 +77,40 @@ quit will Quit the gdb.
 `        Inferior 1 [process 12172] will be killed.  `  
 `  `  
 `Quit anyway? (y or n) y`  
+
+-----
+
+Gdb also allows you to perform debug of a program that is running. You can attach to a running process by specifying the process id of the process. Let us try that functionality also.
+
+Let us write a program that runs infinitely so that we have plenty of time of run this process and attach to it.
+
+```cpp
+#include <iostream>
+
+int main()
+{
+	int *a = (int*)malloc(1000*sizeof(int));
+	a[999] = 4;
+	while(1)
+	{
+		a[0] = (a[999]+100)%1000;
+		for(int i=1;i<1000;i++)
+		{
+			a[i] = (a[i-1]+100)%1000;
+		}
+	}
+}
+```
+I compile the program using `g++ infinte.cpp -o infinte -g` command to compile. Let us run this in background so that we have terminal under us. You can do this in two terminals: first terminal to run the `infinite` program and second to run the other `gdb` commands.
+
+`ps` command in terminal will reveal the process id of the process that I am running. If you do not see it, you can run `ps -u <username> -a`. The pid in my case is `9838`.
+
+Now we will start gdb such that the process with id 9838 will be attached to gdb. The command that I used was  
+`sudo gdb -p 9838`
+I could not do it without sudo access.
+
+Now we can follow the similar operation to debug and see the intermediate values.
+
+----
+
+
